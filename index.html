@@ -1,0 +1,483 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Natan Novtarain · Kusuma Lab</title>
+<meta name="description" content="AI Learning Hub Kusuma Lab. Cara Natan pakai AI buat beresin kerjaan kantor dan bangun tim konten sendiri sebagai Solo Creator, plus freebies prompt gratis.">
+<meta name="theme-color" content="#07080B">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-3 -4 58 56'%3E%3Cg transform='rotate%28-8 24 26%29'%3E%3Cpath d='M37 31 L45.5 19.5' stroke='%232FA89A' stroke-width='6.5' stroke-linecap='round'/%3E%3Cpath d='M11.5 32 L6.5 39' stroke='%232FA89A' stroke-width='6' stroke-linecap='round'/%3E%3Cpath transform='translate%282 -6%29 scale%28.22%29' d='M80 64 L80 74 Q60 104 40 136 Q24 162 26 178 Q28 196 50 198 L150 198 Q172 196 174 178 Q176 162 160 136 Q140 104 120 74 L120 64 Z' fill='%2397FCE4'/%3E%3Crect x='18.3' y='3.6' width='11.4' height='5.4' rx='2.2' fill='%232FA89A'/%3E%3Ccircle cx='19.5' cy='23' r='4.3' fill='%23fff'/%3E%3Ccircle cx='28.5' cy='23' r='4.3' fill='%23fff'/%3E%3Ccircle cx='20.2' cy='23.4' r='2.3' fill='%2307080B'/%3E%3Ccircle cx='29.2' cy='23.4' r='2.3' fill='%2307080B'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="canonical" href="https://kusumalab.com/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://kusumalab.com/">
+<meta property="og:title" content="Siang ngantor, malem ngonten! Dua-duanya dibantu AI">
+<meta property="og:description" content="AI Learning Hub Kusuma Lab. Cara Natan pakai AI buat beresin kerjaan kantor dan bangun tim konten sendiri sebagai Solo Creator, plus freebies prompt gratis.">
+<meta property="og:locale" content="id_ID">
+<meta property="og:image" content="https://kusumalab.com/assets/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="apple-touch-icon" href="assets/touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Bricolage+Grotesque:opsz,wght@12..96,400..700&family=Newsreader:ital,opsz,wght@1,6..72,400;1,6..72,500&display=swap">
+<link rel="stylesheet" href="assets/kl.css">
+</head>
+<body>
+<div class="progress" id="progress" aria-hidden="true"></div>
+<button type="button" class="to-top" id="to-top" aria-label="Kembali ke atas"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5"/><path d="M6 11l6-6 6 6"/></svg></button>
+<div class="cursor-glow" id="cursor-glow" aria-hidden="true"></div>
+
+<nav class="nav" aria-label="Utama">
+  <div class="navbar">
+    <span class="brand-wrap"><button type="button" class="mark" id="logo-labi" aria-label="Labi. Psst, coba klik 3 kali"></button><span class="egg-bubble" id="egg-bubble" role="tooltip">Psst, klik aku 3x!</span><a class="brand" href="#top">Kusuma Lab</a></span>
+    <span class="divider" aria-hidden="true"></span>
+    <div class="navlinks" id="navlinks">
+      <a class="btn" href="#story" data-sec="story">Story</a>
+      <a class="btn" href="#roadmap" data-sec="roadmap">Roadmap</a>
+      <a class="btn" href="#calculator" data-sec="calculator">Calculator</a>
+      <a class="btn" href="#freebies" data-sec="freebies">Freebies</a>
+      <a class="btn" href="#contact" data-sec="contact">Contact</a>
+      <a class="pill-all only-m" href="freebies/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="2"/><rect x="14" y="3" width="7" height="7" rx="2"/><rect x="3" y="14" width="7" height="7" rx="2"/><rect x="14" y="14" width="7" height="7" rx="2"/></svg><span>Semua Freebies</span></a>
+    </div>
+    <div class="nav-right">
+      <a class="pill-all" href="freebies/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="2"/><rect x="14" y="3" width="7" height="7" rx="2"/><rect x="3" y="14" width="7" height="7" rx="2"/><rect x="14" y="14" width="7" height="7" rx="2"/></svg><span>Semua Freebies</span></a>
+      <button type="button" class="btn icon-btn mode-mini" id="mode-mini" aria-label="Ganti mode tampilan"></button>
+    </div>
+    <button type="button" class="btn icon-btn menu-btn" id="menu-btn" aria-label="Buka menu" aria-expanded="false" aria-controls="navlinks"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+  </div>
+</nav>
+
+<main class="wrap" id="top">
+  <header class="hero">
+    <div class="grain" aria-hidden="true"></div>
+    <div class="surfer" id="surfer" aria-hidden="true"><div class="board"></div></div>
+    <svg class="wave-line" viewBox="0 0 1200 96" preserveAspectRatio="none" aria-hidden="true"><path class="w2" pathLength="1" d="M0 48 C 100 96, 200 96, 300 48 S 500 0, 600 48 S 800 96, 900 48 S 1100 0, 1200 48"/><path pathLength="1" d="M0 48 C 100 4, 200 4, 300 48 S 500 92, 600 48 S 800 4, 900 48 S 1100 92, 1200 48"/></svg>
+    <span class="tag anim">AI Learning Hub</span>
+    <h1 class="anim">Siang ngantor, malem ngonten!<span>Dua-duanya dibantu AI</span></h1>
+    <p class="lede anim">Aku pakai <span class="hl">AI</span> buat beresin kerjaan kantor yang berulang, terus waktu luangnya aku pakai buat bangun tim kontenku sendiri <em>as a</em> <span class="hl">Solo Creator</span>. Semua yang <em>works</em> aku taruh di sini, gratis!</p>
+    <div class="ctas anim">
+      <a class="btn btn-main" href="#freebies">Ambil freebies gratis <svg class="ico arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></a>
+      <a class="btn" href="#story">Kenalan dulu</a>
+    </div>
+  </header>
+
+  <section id="story" class="reveal glow-l">
+    <div class="story">
+      <div class="story-card">
+        <span class="tag">Story</span>
+        <h2 class="hello"><span class="kia">Kia ora!</span>Kenalin, aku Natan!</h2>
+        <p>Karyawan kantoran biasa yang ditempatkan di daerah terpencil di Kalimantan, 15 jam dari kota terdekat dan jauh dari keluarga. Siang ngantor, malemnya ngonten. Kerjaan kantor yang repetitif aku serahin ke <span class="hl">AI</span>, terus waktu luangnya aku pakai buat bangun tim kontenku sendiri sebagai <span class="hl">Solo Creator</span>.</p>
+        <p><b>Kusuma Lab</b> adalah tempatku mendokumentasikan prosesnya, dari yang berhasil sampai yang gagal, biar kamu bisa langsung cobain yang <em>works</em>. Letsgo, kita berproses bareng!</p>
+      </div>
+      <aside class="vision arcs" aria-label="Visi">
+        <span class="tag">Vision</span>
+        <p><span class="hl">AI</span> sama <span class="hl">Konten</span> itu dua <span class="hl">leverage</span> paling gede di abad ini. Tapi ada harga yang tetap harus dibayar, yaitu kerja keras. Mau dibayar di umur 25 sampai 30, atau pas tua nanti.</p>
+        <p>Aku pilih bayar di awal, biar nanti bisa ngejar <span class="hl">Freedom</span> versiku sendiri. Traveling kapan aja, ke mana aja, bareng orang-orang yang aku sayang.</p>
+        <p class="q">Kalau kamu, <span>pilih bayar kapan?</span></p>
+      </aside>
+    </div>
+  </section>
+
+  <section id="labi" class="labi-sec" aria-label="Kenalan dengan Labi">
+    <div class="labi-intro">
+      <button type="button" class="labi-stage" data-labi-cycle aria-label="Klik Labi buat ganti ekspresinya"></button>
+      <div class="labi-copy">
+        <span class="tag">Meet Labi</span>
+        <h2>Halo, kenalin juga aku <span class="hl">Labi!</span></h2>
+        <p class="muted">Aku yang nemenin kamu belajar hari ini. Badanku labu lab, isinya semangat. Kalau lagi semangat cairanku penuh, lagi capek ya surut, persis kayak kamu.</p>
+        <p class="labi-mood"><span>Mood Labi sekarang</span> <b id="labi-mood">Halo!</b> <em>Coba klik aku</em></p>
+      </div>
+    </div>
+  </section>
+
+  <section id="roadmap" class="reveal glow-r dots">
+    <div class="sec-head">
+      <span class="tag">Roadmap</span>
+      <h2>Peta yang aku pakai buat ngejar <span class="hl">Freedom</span></h2>
+      <p class="muted">Ini roadmap yang aku jalani sendiri. Kamu bisa jadikan referensi, ambil bagian yang relevan buat hidupmu, atau bikin versimu sendiri. Klik tiap stage buat baca isinya.</p>
+    </div>
+    <div class="stages" role="tablist" aria-label="Stage roadmap" id="stages"></div>
+    <div class="stage-track" id="stage-track" aria-hidden="true"><span class="fill"></span><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    <div class="panel" role="tabpanel" id="stage-panel" aria-live="polite">
+      <div class="p-main"><div class="panel-labi" id="panel-labi" aria-hidden="true"></div><span class="label">Buat kamu</span><h3 id="p-title"></h3><div class="body" id="p-msg"></div></div>
+      <div><span class="label">Ceritaku di stage ini</span><p id="p-story" style="font-size:16px;line-height:1.7"></p></div>
+    </div>
+    <p class="roadnote">Stage-nya nggak harus urut dan bisa jalan barengan. Stage 2 sampai 4 adalah perjalanan pribadiku, bukan nasihat keuangan, jadi sesuaikan sama kondisi kamu.</p>
+
+    <div class="where arcs">
+      <span class="tag">Your Turn</span>
+      <h3>Kamu sampai mana? Klik dong salah satunya</h3>
+      <div class="picks" id="picks" role="group" aria-label="Pilih stage kamu"></div>
+      <div class="reply" id="reply" hidden>
+        <div class="row">
+          <div class="lb-mini" id="reply-labi" aria-hidden="true"></div>
+          <p id="reply-text"></p>
+          <a class="btn btn-main" id="reply-cta" href="#freebies"></a>
+        </div>
+        <div class="freedom" id="freedom" hidden>
+          <div class="field"><label for="fr-name">Nama</label><input type="text" id="fr-name" autocomplete="off" placeholder="Nama atau panggilanmu"></div>
+          <div class="field"><label for="fr-text">Freedom versimu kayak apa?</label>
+            <textarea id="fr-text" placeholder="Misalnya bisa kerja dari mana aja, punya waktu lebih buat orang tua, atau keliling Indonesia bareng pasangan"></textarea></div>
+          <div class="fr-row"><div class="fr-labi" id="fr-labi" aria-hidden="true"></div><div class="fr-card" id="fr-card">
+            <span class="lbl">FREEDOM VERSI <span id="fr-card-name">KAMU</span></span>
+            <p id="fr-card-text" class="empty">Tulisanmu bakal muncul di sini</p>
+          </div></div>
+          <p class="fine lb-hint">Makin lengkap kamu nulis, makin penuh cairan semangat Labi.</p>
+          <div style="display:flex;flex-wrap:wrap;gap:12px;align-items:center">
+            <button type="button" class="btn btn-main" id="fr-copy"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Salin freedom-ku</span></button>
+            <span class="status" id="fr-status" aria-live="polite"></span>
+          </div>
+          <p class="affirm">Print atau tulis ulang, tempel di tempat yang paling sering kamu lihat, biar tiap kali capek kamu ingat lagi buat apa semua ini.</p>
+          <p class="private">Tulisanmu cuma tersimpan di perangkatmu, jadi cuma kamu yang bisa lihat.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="calculator" class="reveal halo" style="--hy:62%;--hh:85%">
+    <div class="sec-head">
+      <span class="tag">Time Calculator</span>
+      <h2>Berapa banyak waktu yang bisa kamu beli balik?</h2>
+      <p class="muted">Geser sesuai kerjaanmu sendiri. Hitungannya pakai 48 minggu kerja setahun dan 8 jam per hari.</p>
+    </div>
+    <div class="calc">
+      <div class="card spot">
+        <div class="field">
+          <div class="row"><label for="hours">Jam kerjaan berulang per minggu</label><span class="val" id="hours-val"></span></div>
+          <input type="range" id="hours" min="1" max="30" step="1" value="8">
+        </div>
+        <div class="field">
+          <div class="row"><label for="share">Porsi yang menurutmu bisa dibantu AI</label><span class="val" id="share-val"></span></div>
+          <input type="range" id="share" min="10" max="70" step="5" value="30">
+        </div>
+        <p class="status">Contohnya rekap data, merapikan file, bikin draf email, notulen rapat, atau laporan rutin.</p>
+        <div class="note"><span class="ntag">HONEST NOTE</span><span>Ini simulasi, bukan janji. Angka aslinya tergantung jenis kerjaanmu dan seberapa rapi sistemmu.</span></div>
+      </div>
+      <div class="card result" aria-live="polite">
+        <div class="labi-spot" id="calc-labi" aria-hidden="true"></div>
+        <span style="font:500 11px var(--mono);letter-spacing:.08em;color:var(--muted)">HASIL SIMULASI</span>
+        <div class="big" id="year-hours"><span id="yr-num">0</span><small> jam/tahun</small></div>
+        <p class="sub">Setara <b id="days">0 hari</b> penuh buat keluarga, istirahat, atau bangun sesuatu milikmu sendiri.</p>
+        <svg class="chart" viewBox="0 0 320 140" role="img" aria-label="Grafik akumulasi jam yang kamu beli balik selama 12 bulan" id="chart">
+          <defs>
+            <linearGradient id="areaFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--accent-text)" stop-opacity=".28"/><stop offset="1" stop-color="var(--accent-text)" stop-opacity="0"/></linearGradient>
+            <pattern id="dotgrid" width="12" height="12" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r="1" class="grid"/></pattern>
+          </defs>
+          <rect x="8" y="8" width="296" height="104" fill="url(#dotgrid)" opacity=".7"/>
+          <path class="area" id="c-area" d=""/>
+          <path class="lineP" id="c-line" d=""/>
+          <circle class="endDot" id="c-mdot" r="3" cx="0" cy="0" opacity=".6"/>
+          <circle class="endDot" id="c-dot" r="4" cx="0" cy="0"/>
+          <text class="vlab" id="c-mid" x="0" y="0" text-anchor="middle"></text>
+          <text class="vlab strong" id="c-val" x="0" y="0" text-anchor="end"></text>
+          <text x="8" y="132">Sekarang</text>
+          <text x="304" y="132" text-anchor="end">Bulan 12</text>
+        </svg>
+        <div class="stats">
+          <div><span>Per minggu</span><b id="st-w">0</b></div>
+          <div><span>Per bulan</span><b id="st-m">0</b></div>
+          <div><span>Per tahun</span><b id="st-y">0</b></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="freebies" class="reveal glow-r">
+    <div class="sec-head">
+      <span class="tag">Freebies</span>
+      <h2>Mulai dari kenal dirimu, baru pakai AI-nya</h2>
+      <p class="muted">Pilih jalurmu, isi kolomnya, prompt-nya ikut menyesuaikan. Klik salah satu AI di bawah prompt, otomatis tersalin dan langsung kebuka.</p>
+    </div>
+
+    <div class="pick-hint arcs" id="pick-hint">
+      <div class="pick-labi" data-labi="fokus" aria-hidden="true"></div>
+      <div class="pick-bubble"><b>Eits, pilih salah satu dulu!</b><span>Kerjaan Kantor atau Solo Creator? Freebies-nya nyesuaiin jalurmu.</span></div>
+    </div>
+    <div class="tabs" role="tablist" aria-label="Kategori freebies">
+      <button type="button" class="tabbtn" role="tab" id="tab-office" aria-controls="panel-office" aria-selected="false">
+        <span class="t">Kerjaan Kantor</span><span class="d">Temukan kerjaan berulang, lalu delegasikan ke AI</span>
+      </button>
+      <button type="button" class="tabbtn" role="tab" id="tab-creator" aria-controls="panel-creator" aria-selected="false">
+        <span class="t">Solo Creator</span><span class="d">Petain posisimu, lalu temukan arah kontenmu</span>
+      </button>
+    </div>
+
+    <div id="panel-office" class="tabpanel" role="tabpanel" aria-labelledby="tab-office" hidden>
+      <div class="note"><span class="ntag">HONEST NOTE</span><span data-cat-note="kantor"></span></div>
+      <div class="freebies" data-core="kantor"></div>
+    </div>
+
+    <div id="panel-creator" class="tabpanel" role="tabpanel" aria-labelledby="tab-creator" hidden>
+      <div class="note"><span class="ntag">HONEST NOTE</span><span data-cat-note="creator"></span></div>
+      <div class="freebies" data-core="creator"></div>
+    </div>
+
+    <a class="more-card spot" href="freebies/">
+      <span class="mc-text">
+        <span class="tag">Freebies Library</span>
+        <span class="mc-title">Semua freebie dari kontenku, kumpul di satu tempat</span>
+        <span class="mc-sub" id="more-sub"></span>
+      </span>
+      <span class="btn btn-main">Buka semua freebies <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></span>
+    </a>
+  </section>
+
+  <section id="community" class="reveal halo">
+    <div class="community-wrap" id="community-wrap">
+    <div class="peek" aria-hidden="true"><div class="peek-bubble">Psst, sini gabung!</div><div class="peek-labi" data-labi="halo"></div></div>
+    <div class="community">
+      <div class="grain" aria-hidden="true"></div>
+      <span class="tag">Community · Coming Soon</span>
+      <h2>Buat kamu yang punya visi dan mau ngejar <span class="hl">Freedom</span> versimu sendiri, sini gabung! <span class="wave" aria-hidden="true">👋</span></h2>
+      <p class="muted" style="font-size:17px">Komunitasnya masih disiapin.</p>
+      <p class="follow">Sementara itu, kamu bisa ikutin prosesnya di sini:</p>
+      <div class="socials">
+        <a class="btn btn-main" href="https://www.instagram.com/natannovtarain/" target="_blank" rel="noopener">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>Instagram</a>
+        <a class="btn" href="https://www.tiktok.com/@natannovtarain" target="_blank" rel="noopener">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3v11.5a3.5 3.5 0 1 1-3.5-3.5"/><path d="M14 3a5 5 0 0 0 5 5"/></svg>TikTok</a>
+        <a class="btn" href="https://www.threads.com/@natannovtarain" target="_blank" rel="noopener">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-4 8"/></svg>Threads</a>
+        <a class="btn" href="https://www.youtube.com/@natannovtarain?sub_confirmation=1" target="_blank" rel="noopener">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="5.5" width="19" height="13" rx="4"/><path d="M10 9.5v5l4.5-2.5z" fill="currentColor" stroke="none"/></svg>YouTube</a>
+      </div>
+    </div>
+    </div>
+  </section>
+
+  <section id="contact" class="reveal glow-l">
+    <div class="contact">
+      <div class="sec-head" style="margin:0">
+        <span class="tag">Partnership</span>
+        <h2>Open to meaningful collaborations!</h2>
+        <p class="muted">For brand partnerships, content collaborations, and other professional inquiries, please reach out via WhatsApp or email.</p>
+      </div>
+      <div class="card spot">
+        <a class="btn btn-main" href="https://api.whatsapp.com/send?phone=6285190347881" target="_blank" rel="noopener">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22z"/></svg>Chat on WhatsApp</a>
+        <button type="button" class="btn" id="copy-mail">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 6L2 7"/></svg><span>Copy email address</span></button>
+        <p class="status" id="mail-status" aria-live="polite" style="text-align:center"></p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <p class="slogan">Work to <span>experience life!</span></p>
+    <p class="egg-hint">Psst, ada rahasia kecil. Klik logo Labi di pojok kiri atas 3 kali.</p>
+    <p class="copy">© 2026 Kusuma Lab. All rights reserved.</p>
+  </footer>
+</main>
+
+<script src="assets/freebies-data.js"></script>
+<script src="assets/kl.js"></script>
+<script>
+(function(){
+  var store=KL.store,copyText=KL.copyText,D=KL.data;
+  /* freebies fondasi dari data */
+  ['kantor','creator'].forEach(function(c){
+    document.querySelector('[data-cat-note="'+c+'"]').textContent=D.categories[c].note;
+    var grid=document.querySelector('[data-core="'+c+'"]');
+    D.freebies.filter(function(f){return f.core&&f.category===c;}).forEach(function(f){
+      var art=KL.mk('article','card spot');art.setAttribute('aria-labelledby',f.key+'-title');KL.fillFreebie(f,art);grid.appendChild(art);
+    });
+  });
+  var total=D.freebies.length,extra=D.freebies.filter(function(f){return !f.core;}).length;
+  document.getElementById('more-sub').textContent=extra>0
+    ?'Ada '+extra+' freebie lain dari konten-kontenku, total '+total+' freebie, dan bakal terus nambah.'
+    :'Freebie baru dari tiap kontenku bakal dikumpulin di sana. Sekarang isinya '+total+' freebie fondasi ini, dan bakal terus nambah.';
+
+  /* roadmap */
+  var icons={
+    sun:'<path d="M12 3v2M5.6 5.6l1.4 1.4M3 12h2M19 12h2M17 7l1.4-1.4"/><path d="M7 16a5 5 0 0 1 10 0"/><path d="M3 20h18"/>',
+    up:'<path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/>',
+    shield:'<path d="M12 3l8 3v5c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/>',
+    layers:'<path d="M12 3l9 5-9 5-9-5z"/><path d="M3 13l9 5 9-5"/>',
+    sprout:'<path d="M12 21v-9"/><path d="M12 12C12 8 9 5 4 5c0 4 3 7 8 7z"/><path d="M12 14c0-3 2.5-6 8-6 0 3.5-3 6-8 6z"/>',
+    plane:'<path d="M21 3L3 10.5l7 2.5 2.5 7z"/><path d="M10 13l11-10"/>'
+  };
+  function svg(name){return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+icons[name]+'</svg>';}
+  var stages=[
+    {n:'0',name:'Wake Up',c:'var(--s1)',icon:'sun',labi:'mikir',
+     msg:['Standar hidup yang kamu kejar sekarang, kamu sendiri yang nentuin, atau hanya ikut standar sosial?','Kalau belum pernah nulis hidup seperti apa yang kamu mau, dari mana kamu tahu itu cukup? Umur 25 sampai 30 itu jendela paling menentukan, tapi hari ini tetap waktu terbaik buat mulai.'],
+     close:'Stage ini bukan soal ngerasa kurang, tapi soal sadar dan milih jalan yang kita mau.',
+     story:'Mataku kebuka lewat pergaulan dan media sosial. Ternyata hidup jauh lebih luas, dan angka yang dulu kuanggap besar ternyata nggak sebesar itu.'},
+    {n:'1',name:'Earn More',c:'var(--s2)',icon:'up',labi:'fokus',
+     msg:['Nggak harus cari kerjaan baru. Mulai dari bikin kerjaan sekarang lebih ringan pakai AI.','Waktu dan tenaga ekstranya bisa kamu pakai buat naikin nilai tawar atau bangun sumber income kedua. Satu pintu tertutup, kamu nggak panik.'],
+     close:'Makin banyak pilihan, makin bebas kamu nentuin langkah.',
+     story:'Ini fokusku sekarang. Kerjaan berulang aku serahin ke AI, waktunya aku pakai buat bangun tim kontenku sendiri sebagai Solo Creator.'},
+    {n:'2',name:'Stay Safe',c:'var(--s3)',icon:'shield',labi:'halo',
+     msg:['Dana darurat dan proteksi dasar itu kelihatan membosankan, tapi justru ini yang bikin kamu berani ambil langkah besar.','Tanpa bantalan, satu kesalahan bisa ngabisin semuanya.'],
+     close:'Aman dulu, baru berani.',
+     story:'Ini aku jalani dulu sebelum berani melangkah ke tahap berikutnya.'},
+    {n:'3',name:'Manage Smart',c:'var(--s4)',icon:'layers',labi:'berhasil',
+     msg:['Uangmu tiap bulan habis ke mana? Kalau jawabannya nggak tahu, masalahnya belum tentu di gaji.','Pisahkan uang sesuai tujuannya, lalu biarkan sistem yang kerja. Niat bisa naik turun, sistem nggak.'],
+     close:'Kalau bisa dipercaya kelola yang kecil, kamu akan dipercaya kelola yang lebih besar.',
+     story:'Sistem ini udah jalan. Uang yang masuk langsung dipisah sesuai posnya.'},
+    {n:'4',name:'Invest Right',c:'var(--s5)',icon:'sprout',labi:'aha',
+     msg:['Kita kerja buat dapat uang. Tapi mau sampai kapan cuma kita yang kerja?','Mulai kecil, di instrumen yang kamu pahami, dan jangan ikut-ikutan. Makin awal mulai, makin terasa efek waktunya.'],
+     close:'Pelan-pelan, biarkan uang ikut kerja buat kamu.',
+     story:'Aku baru mulai masuk tahap ini. Masih belajar, dan prosesnya aku ceritain apa adanya.'},
+    {n:'5',name:'Freedom',c:'var(--s6)',icon:'plane',labi:'makasih',
+     msg:['Freedom bukan berarti nggak kerja. Freedom itu bisa memilih kerja apa, di mana, sama siapa, dan buat apa.','Versi tiap orang beda, dan sukses nggak harus lewat jalan yang sama.'],
+     close:'Freedom versimu itu kayak apa? Tulis, terus kejar.',
+     story:'Versiku traveling kapan aja, ke mana aja, bareng orang-orang yang aku sayang. Targetku 30 negara sebelum umur 30.'}
+  ];
+  var wrap=document.getElementById('stages'),panel=document.getElementById('stage-panel');
+  stages.forEach(function(s,i){
+    var b=document.createElement('button');
+    b.type='button';b.className='stage tilt';b.setAttribute('role','tab');b.id='stage-'+i;
+    b.style.setProperty('--c',s.c);
+    var ico=document.createElement('span');ico.className='sico';ico.innerHTML=svg(s.icon);
+    var num=document.createElement('span');num.className='num';num.textContent='STAGE '+s.n;
+    var name=document.createElement('span');name.className='name';name.textContent=s.name;
+    var gh=document.createElement('span');gh.className='ghost';gh.setAttribute('aria-hidden','true');gh.textContent=s.n;
+    b.appendChild(gh);b.appendChild(ico);b.appendChild(num);b.appendChild(name);
+    if(s.focus){var h=document.createElement('span');h.className='here';h.textContent='FOKUSKU SEKARANG';b.appendChild(h);}
+    b.addEventListener('click',function(){pick(i,true);});
+    wrap.appendChild(b);
+  });
+  function pick(i,animate){
+    var s=stages[i];
+    Array.prototype.forEach.call(wrap.children,function(el,j){el.setAttribute('aria-selected',String(i===j));el.tabIndex=i===j?0:-1;});
+    document.getElementById('p-title').textContent='Stage '+s.n+' · '+s.name;
+    var body=document.getElementById('p-msg');body.textContent='';
+    s.msg.forEach(function(t){var p=document.createElement('p');p.className='muted';p.textContent=t;body.appendChild(p);});
+    var c=document.createElement('p');c.className='closing';c.textContent=s.close;body.appendChild(c);
+    document.getElementById('p-story').textContent=s.story;
+    panel.style.setProperty('--c',s.c);wrap.parentNode.style.setProperty('--sel',s.c);
+    var tr=document.getElementById('stage-track');if(tr){tr.style.setProperty('--i',i);Array.prototype.forEach.call(tr.querySelectorAll('i'),function(n,j){n.classList.toggle('done',j<=i);n.classList.toggle('now',j===i);});}
+    var pl=document.getElementById('panel-labi');if(pl&&window.KL&&KL.labi)pl.innerHTML=KL.labi(s.labi);
+    if(animate){panel.classList.remove('swap');void panel.offsetWidth;panel.classList.add('swap');}
+  }
+  wrap.addEventListener('keydown',function(e){
+    var cur=Array.prototype.indexOf.call(wrap.children,document.activeElement);if(cur<0)return;
+    var nxt=e.key==='ArrowRight'?cur+1:e.key==='ArrowLeft'?cur-1:null;if(nxt===null)return;
+    nxt=(nxt+stages.length)%stages.length;pick(nxt,true);wrap.children[nxt].focus();e.preventDefault();
+  });
+  pick(0,false);
+
+  /* your turn */
+  var replies=[
+    {t:'Welcome to the club! Sadar itu langkah yang paling sering dilewatin orang, dan kamu udah di sini. Yuk petain posisimu biar tahu mulai dari mana.',cta:'Cek stage-mu',go:1,target:'c1-title'},
+    {t:'Tos dulu, aku juga lagi fokus di sini! Mulai dari nemuin kerjaan mana yang bisa kamu serahin ke AI.',cta:'Temukan kerjaan berulangmu',go:0,target:'k1-title'},
+    {t:'Mantap, bantalanmu lagi dibangun. Sekarang cek juga, berapa banyak waktu yang bisa kamu amankan.',cta:'Coba kalkulator waktu',go:null,target:'calculator'},
+    {t:'Sistem uangmu udah jalan? Keren. Sekarang waktunya bikin sistem yang sama buat kerjaanmu.',cta:'Bikin Claude Project pertamamu',go:0,target:'k2-title'},
+    {t:'Uangmu udah mulai ikut kerja. Satu leverage lagi yang bisa kamu tambah, yaitu Konten.',cta:'Temukan arah kontenmu',go:1,target:'c2-title'},
+    {t:'Wah, udah sampai sini atau lagi ngejar ke sini? Tulis freedom versimu di bawah ya!',cta:null}
+  ];
+  var picks=document.getElementById('picks'),reply=document.getElementById('reply'),freedom=document.getElementById('freedom'),cta=document.getElementById('reply-cta');
+  stages.forEach(function(s,i){
+    var b=document.createElement('button');b.type='button';b.className='pick';b.setAttribute('aria-pressed','false');
+    b.style.setProperty('--c',s.c);
+    var d=document.createElement('span');d.className='dot';b.appendChild(d);
+    b.appendChild(document.createTextNode(s.name));
+    b.addEventListener('click',function(){choose(i,true);});
+    picks.appendChild(b);
+  });
+  function choose(i,animate){
+    Array.prototype.forEach.call(picks.children,function(el,j){el.setAttribute('aria-pressed',String(i===j));});
+    var r=replies[i];
+    document.getElementById('reply-text').textContent=r.t;
+    if(window.KL&&KL.labi)document.getElementById('reply-labi').innerHTML=KL.labi(stages[i].labi);
+    if(r.cta){cta.hidden=false;cta.textContent=r.cta;cta.setAttribute('href','#'+r.target);
+      cta.onclick=function(e){if(r.go!==null){e.preventDefault();showTab(r.go);var el=document.getElementById(r.target);if(el)el.scrollIntoView({behavior:'smooth',block:'center'});}};
+    }else{cta.hidden=true;}
+    freedom.hidden=i!==5;
+    reply.hidden=false;
+    if(animate){reply.classList.remove('pop');void reply.offsetWidth;reply.classList.add('pop');store('kl-stage',String(i));}
+  }
+  var savedStage=store('kl-stage');if(savedStage!==null&&savedStage!==undefined&&replies[+savedStage])choose(+savedStage,false);
+
+  var frText=document.getElementById('fr-text'),frName=document.getElementById('fr-name'),frStatus=document.getElementById('fr-status'),frTimer=null;
+  function frRender(){
+    var n=frName.value.trim(),t=frText.value.trim();
+    document.getElementById('fr-card-name').textContent=n?n.toUpperCase():'KAMU';
+    var ct=document.getElementById('fr-card-text');ct.textContent=t||'Tulisanmu bakal muncul di sini';ct.classList.toggle('empty',!t);
+    store('kl-freedom',JSON.stringify({n:frName.value,t:frText.value}));
+  }
+  try{var fs=JSON.parse(store('kl-freedom')||'null');if(fs){frName.value=fs.n||'';frText.value=fs.t||'';}}catch(e){}
+  frName.addEventListener('input',frRender);frText.addEventListener('input',frRender);
+  function frLabi(){var n=frText.value.trim().length,el=document.getElementById('fr-labi');if(!el||!window.KL||!KL.labi)return;
+    var lv=184-Math.min(1,n/140)*62,pose=n===0?'capek':n<60?'halo':'berhasil';
+    if(el.getAttribute('data-pose')!==pose){el.setAttribute('data-pose',pose);el.innerHTML=KL.labi(pose,{level:lv});}else KL.setLabiLevel(el.querySelector('svg'),lv);}
+  frText.addEventListener('input',frLabi);setTimeout(frLabi,0);
+  frRender();
+  document.getElementById('fr-copy').addEventListener('click',function(){
+    var t=frText.value.trim();
+    if(!t){frStatus.className='status';frStatus.textContent='Tulis dulu freedom versimu ya';frText.focus();return;}
+    var n=frName.value.trim();
+    var msg='Freedom versi '+(n||'aku')+'\n'+t;
+    var btnLabel=this.querySelector('span');
+    copyText(msg,document.getElementById('fr-card-text'),function(ok){
+      frStatus.className='status'+(ok?' ok':'');
+      frStatus.textContent=ok?'Tersalin!':'Teksnya sudah kupilih, tinggal salin manual';
+      btnLabel.textContent=ok?'Tersalin':'Salin freedom-ku';
+      clearTimeout(frTimer);
+      frTimer=setTimeout(function(){frStatus.textContent='';btnLabel.textContent='Salin freedom-ku';},2500);
+    });
+  });
+
+  /* kalkulator */
+  var calcSeen=false,lastYr=0;
+  function fmtN(v){return Math.round(v).toLocaleString('id-ID');}
+  (function(){var sec=document.getElementById('calculator');
+    if(!('IntersectionObserver' in window)||KL.calm){calcSeen=true;return;}
+    var ob=new IntersectionObserver(function(es){if(es[0].isIntersecting){calcSeen=true;KL.countTo(document.getElementById('yr-num'),lastYr,fmtN,1400);ob.disconnect();}},{threshold:.35});ob.observe(sec);})();
+  var hours=document.getElementById('hours'),share=document.getElementById('share');
+  function calc(){
+    var h=+hours.value,p=+share.value;
+    var wk=h*p/100,yr=Math.round(wk*48),mo=Math.round(wk*4);
+    document.getElementById('hours-val').textContent=h+' jam';
+    document.getElementById('share-val').textContent=p+'%';
+    lastYr=yr;if(calcSeen)KL.countTo(document.getElementById('yr-num'),yr,fmtN);
+    var lv=182-Math.min(1,yr/400)*54,pose=yr<40?'capek':yr<150?'halo':'aha',cl=document.getElementById('calc-labi');
+    if(cl.getAttribute('data-pose')!==pose){cl.setAttribute('data-pose',pose);cl.innerHTML=KL.labi(pose,{level:lv});}else{KL.setLabiLevel(cl.querySelector('svg'),lv);}
+    document.getElementById('days').textContent=Math.round(yr/8).toLocaleString('id-ID')+' hari';
+    document.getElementById('st-w').textContent=(Math.round(wk*10)/10).toLocaleString('id-ID')+' jam';
+    document.getElementById('st-m').textContent=mo.toLocaleString('id-ID')+' jam';
+    document.getElementById('st-y').textContent=yr.toLocaleString('id-ID')+' jam';
+    var max=Math.max(yr*1.3,1),x0=8,x1=304,y0=112,y1=12,pts=[];
+    for(var m=0;m<=12;m++){var val=wk*4*m;var x=x0+(x1-x0)*m/12;var y=y0-(y0-y1)*(val/(max));pts.push([x,y]);}
+    var lab=document.getElementById('c-val');lab.textContent=yr.toLocaleString('id-ID')+' jam';
+    lab.setAttribute('x',pts[12][0]-8);lab.setAttribute('y',pts[12][1]-12);
+    var mid=document.getElementById('c-mid');mid.textContent=Math.round(wk*24).toLocaleString('id-ID')+' jam';
+    mid.setAttribute('x',pts[6][0]);mid.setAttribute('y',pts[6][1]-12);
+    document.getElementById('c-mdot').setAttribute('cx',pts[6][0]);document.getElementById('c-mdot').setAttribute('cy',pts[6][1]);
+    var d='M'+pts.map(function(q){return q[0].toFixed(1)+' '+q[1].toFixed(1);}).join(' L');
+    document.getElementById('c-line').setAttribute('d',d);
+    document.getElementById('c-area').setAttribute('d',d+' L'+x1+' '+y0+' L'+x0+' '+y0+' Z');
+    var last=pts[pts.length-1];var dot=document.getElementById('c-dot');dot.setAttribute('cx',last[0]);dot.setAttribute('cy',last[1]);
+  }
+  hours.addEventListener('input',calc);share.addEventListener('input',calc);calc();
+
+  /* tabs */
+  var tabs=[document.getElementById('tab-office'),document.getElementById('tab-creator')];
+  var panels=[document.getElementById('panel-office'),document.getElementById('panel-creator')];
+  var HINT0=null;
+  function setHint(open){var h=document.getElementById('pick-hint');if(!h)return;var b=h.querySelector('b'),s=h.querySelector('.pick-bubble span');
+    if(!HINT0)HINT0=[b.textContent,s.textContent];
+    if(open){b.textContent='Sip, pilihan bagus!';s.textContent='Klik jalur yang sama sekali lagi kalau mau nutup, atau pindah ke jalur satunya.';}
+    else{b.textContent=HINT0[0];s.textContent=HINT0[1];}
+    h.classList.toggle('happy',!!open);var pl=h.querySelector('.pick-labi');if(pl&&window.KL&&KL.labi)pl.innerHTML=KL.labi(open?'berhasil':'fokus');}
+  function closeTabs(){tabs.forEach(function(t,j){t.setAttribute('aria-selected','false');panels[j].hidden=true;});document.querySelector('.tabs').classList.remove('chosen');setHint(false);}
+  function showTab(i){
+    var fresh=panels[i].hidden;
+    tabs.forEach(function(t,j){t.setAttribute('aria-selected',String(i===j));t.tabIndex=i===j?0:-1;panels[j].hidden=i!==j;});
+    document.querySelector('.tabs').classList.add('chosen');
+    setHint(true);
+    if(fresh){panels[i].classList.remove('panel-in');void panels[i].offsetWidth;panels[i].classList.add('panel-in');}
+  }
+  tabs.forEach(function(t,i){
+    var ch=document.createElement('span');ch.className='chev';ch.setAttribute('aria-hidden','true');
+    ch.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>';t.appendChild(ch);
+    t.addEventListener('click',function(){if(!panels[i].hidden)closeTabs();else showTab(i);});
+    t.addEventListener('keydown',function(e){if(e.key==='ArrowRight'||e.key==='ArrowLeft'){var n=i===0?1:0;showTab(n);tabs[n].focus();e.preventDefault();}});
+  });
+
+})();
+</script>
+<script data-goatcounter="https://kusumalab.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
