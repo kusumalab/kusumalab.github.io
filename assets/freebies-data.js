@@ -1,7 +1,9 @@
 /* Data freebies Kusuma Lab. Satu-satunya tempat menambah atau mengubah freebie.
    Cara menambah freebie baru: salin satu blok di "freebies", ganti isinya, taruh paling atas.
    core:true hanya untuk 4 freebie fondasi yang tampil di halaman utama. Freebie dari konten selalu core:false.
-   Di prompt, {id} diganti isi kolom dengan id yang sama. */
+   Di prompt, {id} diganti isi kolom dengan id yang sama.
+   device: 'hp' atau 'laptop', perangkat tempat freebie paling enak dieksekusi. Labelnya tampil otomatis di atas freebie.
+   Freebie laptop otomatis dapat tombol "Salin link buat dibuka di laptop". */
 window.KL_DATA = {
   site: 'https://kusumalab.com',
   categories: {
@@ -18,7 +20,7 @@ window.KL_DATA = {
   },
   freebies: [
     {
-      key: 'k1', slug: 'temukan-tugas', category: 'kantor', core: true, date: '2026-11-07', source: null,
+      key: 'k1', slug: 'temukan-tugas', category: 'kantor', device: 'hp', core: true, date: '2026-11-07', source: null,
       step: 'LANGKAH 1 · DISCOVER', chips: ['CLAUDE', 'CHATGPT', 'GEMINI'],
       title: 'Temukan kerjaan yang bisa kamu delegasikan ke AI',
       desc: 'Tiap kerjaan beda-beda. Petain dulu mana yang bisa dibantu AI sepenuhnya, mana yang sebagian, dan mana yang tetap harus kamu pegang.',
@@ -36,7 +38,7 @@ window.KL_DATA = {
       ais: ['claude', 'chatgpt', 'gemini']
     },
     {
-      key: 'k2', slug: 'claude-project', category: 'kantor', core: true, date: '2026-11-07', source: null,
+      key: 'k2', slug: 'claude-project', category: 'kantor', device: 'laptop', core: true, date: '2026-11-07', source: null,
       step: 'LANGKAH 2 · BUILD', chips: ['CLAUDE ONLY', 'TUTORIAL'],
       title: 'Ubah satu kerjaan berulang jadi Claude Project',
       summary: 'Tutorial 5 langkah bikin Claude Project, plus prompt yang nulisin instructions-nya buat kamu.',
@@ -59,7 +61,7 @@ window.KL_DATA = {
       fine: 'Fitur Projects bisa sedikit beda tergantung paket Claude yang kamu pakai.'
     },
     {
-      key: 'c1', slug: 'cek-stage', category: 'creator', core: true, date: '2026-11-07', source: null,
+      key: 'c1', slug: 'cek-stage', category: 'creator', device: 'hp', core: true, date: '2026-11-07', source: null,
       step: 'LANGKAH 1 · KENALI POSISIMU', chips: ['CLAUDE', 'CHATGPT', 'GEMINI'],
       title: 'Cek kamu ada di stage mana',
       desc: 'AI bakal nanya beberapa hal, terus bantu petain posisimu di roadmap 0 sampai 5, langkah konkret 30 hari ke depan, risikonya, dan apakah jalurmu lebih cocok di profesional atau bangun personal brand sendiri.',
@@ -75,7 +77,7 @@ window.KL_DATA = {
       ais: ['claude', 'chatgpt', 'gemini']
     },
     {
-      key: 'c2', slug: 'arah-konten', category: 'creator', core: true, date: '2026-11-07', source: null,
+      key: 'c2', slug: 'arah-konten', category: 'creator', device: 'hp', core: true, date: '2026-11-07', source: null,
       step: 'LANGKAH 2 · TEMUKAN ARAHMU', chips: ['CLAUDE', 'CHATGPT', 'GEMINI'],
       title: 'Temukan arah kontenmu sebagai Solo Creator',
       desc: 'Mau ngonten apa, perjalanannya bakal kayak apa, cara monetisasinya, dan kenapa perhatian orang jadi mata uang paling berharga di era media sekarang.',

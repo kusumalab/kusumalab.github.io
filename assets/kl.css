@@ -5,7 +5,7 @@
   --accent:#97FCE4; --accent-ink:#04060C; --accent-text:#97FCE4; --hl:#97FCE4;
   --glow:rgba(47,168,154,.42); --glow-soft:rgba(47,168,154,.16);
   --tag-bg:rgba(151,252,228,.10); --tag-line:rgba(151,252,228,.38); --tag-fg:#97FCE4;
-  --prompt-bg:#07080B; --prompt-fg:#E9F7F2;
+  --prompt-bg:#07080B; --prompt-fg:#97FCE4;
   --signal:#FFB86B; --signal-bg:rgba(255,184,107,.10); --signal-ink:#F5F5F0;
   --dot:rgba(151,252,228,.20); --grain-opacity:.05;
   --spot:rgba(151,252,228,.10); --card-top:rgba(47,168,154,.12); --arc:rgba(151,252,228,.10); --wave:#97FCE4;
@@ -76,7 +76,7 @@ em{font-style:italic}
 @media (min-width:1081px){.navbar{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:12px}.divider{display:none}.navlinks{overflow:visible;justify-content:center}.toggle{justify-self:end;margin-left:0}}
 .toggle{display:flex;gap:4px;margin-left:auto}
 .toggle .btn{min-height:36px;padding:0 14px;font-size:13px}
-.icon-btn{width:40px;min-height:40px;padding:0}
+.icon-btn{width:44px;min-height:44px;padding:0}
 .icon-btn svg{width:18px;height:18px}
 .mode-mini,.menu-btn{display:none}
 @media (max-width:1080px){
@@ -383,7 +383,7 @@ footer .copy{font-size:13px;color:var(--muted)}
 .badge-new{font:600 11px var(--mono);letter-spacing:.06em;padding:4px 10px;border-radius:999px;background:var(--accent);color:var(--accent-ink)}
 .src-line{font-size:14px;color:var(--muted)}
 .share-row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;padding-top:14px;border-top:1px solid var(--line)}
-.share-row .btn{min-height:40px;font-size:14px}
+.share-row .btn{min-height:44px;font-size:14px}
 .lib-empty{padding:28px;border-radius:16px;border:1px dashed var(--line);text-align:center;color:var(--muted)}
 .lib-back{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:16px 24px;align-items:center}
 .lib-back .btns{display:flex;gap:10px;flex-wrap:wrap}
@@ -682,3 +682,11 @@ footer .copy{font-size:13px;color:var(--muted)}
 .nf h1{font-size:clamp(32px,5vw,52px);line-height:1.08}.nf h1 span{display:block;color:var(--accent-text)}
 .nf .ctas{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:8px}
 @media (max-width:720px){.lb-toast{bottom:78px}.to-top{right:16px;bottom:16px}}
+
+/* label perangkat eksekusi di atas freebie */
+.device{display:inline-flex;align-items:center;gap:6px;font:500 12px/1 var(--display);color:var(--muted);padding:5px 10px 5px 8px;border-radius:999px;background:var(--surface-2);border:1px solid var(--line)}
+.device svg{width:14px;height:14px;flex:none}
+.card > .device{align-self:flex-start}
+/* area sentuh logo diperluas ke 44px tanpa mengubah tampilannya */
+.brand-wrap .mark{position:relative}
+.brand-wrap .mark::after{content:"";position:absolute;inset:-4px}

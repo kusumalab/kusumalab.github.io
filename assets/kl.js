@@ -5,16 +5,20 @@
   function store(k,v){try{if(v===undefined)return localStorage.getItem(k);localStorage.setItem(k,v);}catch(e){return null;}}
 
   /* mode */
-  function setMode(m){
+  /* mode: tiap halaman membuka dengan mode bawaannya (data-default-theme di tag html),
+     pilihan pengunjung hanya disimpan saat dia menekan tombol mode sendiri */
+  function setMode(m,save){
     root.setAttribute('data-theme',m);
     document.getElementById('mode-mini').innerHTML=m==='dark'
       ?'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>'
       :'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>';
     document.getElementById('mode-mini').setAttribute('aria-label',m==='dark'?'Ganti ke mode Light':'Ganti ke mode Dark');
-    store('kl-mode',m);
+    var tc=document.querySelector('meta[name="theme-color"]');if(tc)tc.setAttribute('content',m==='light'?'#F7F7F2':'#07080B');
+    if(save)store('kl-mode',m);
   }
-  setMode(store('kl-mode')==='light'?'light':'dark');
-  document.getElementById('mode-mini').addEventListener('click',function(){setMode(root.getAttribute('data-theme')==='light'?'dark':'light');});
+  var savedMode=store('kl-mode'),defMode=root.getAttribute('data-default-theme')==='light'?'light':'dark';
+  setMode(savedMode==='light'||savedMode==='dark'?savedMode:defMode);
+  document.getElementById('mode-mini').addEventListener('click',function(){setMode(root.getAttribute('data-theme')==='light'?'dark':'light',true);});
   var navbar=document.querySelector('.navbar'),menuBtn=document.getElementById('menu-btn');
   function setMenu(open){navbar.classList.toggle('open',open);menuBtn.setAttribute('aria-expanded',String(open));menuBtn.setAttribute('aria-label',open?'Tutup menu':'Buka menu');}
   menuBtn.addEventListener('click',function(){setMenu(!navbar.classList.contains('open'));});
@@ -77,7 +81,18 @@
   var ext='<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7"/><path d="M8 7h9v9"/></svg>';
   var copyIco='<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>';
   /* analitik GoatCounter: hanya mencatat nama tombol, tanpa isi yang diketik pengunjung */
-  function track(path,title){try{if(window.goatcounter&&window.goatcounter.count)window.goatcounter.count({path:path,title:title||path,event:true});}catch(e){}}
+  /* event yang terjadi sebelum skrip GoatCounter selesai dimuat (misalnya freebie dibuka dari link langsung) diantrekan dulu */
+  var trackQ=[],trackPoll=null;
+  function gcReady(){return window.goatcounter&&window.goatcounter.count;}
+  function send(ev){try{window.goatcounter.count({path:ev[0],title:ev[1]||ev[0],event:true});}catch(e){}}
+  function track(path,title){
+    if(gcReady()){send([path,title]);return;}
+    trackQ.push([path,title]);
+    if(!trackPoll){var tries=0;trackPoll=setInterval(function(){
+      if(gcReady()){clearInterval(trackPoll);trackPoll=null;while(trackQ.length)send(trackQ.shift());}
+      else if(++tries>40){clearInterval(trackPoll);trackPoll=null;trackQ=[];}
+    },250);}
+  }
   function mk(tag,cls,html){var e=document.createElement(tag);if(cls)e.className=cls;if(html!=null)e.innerHTML=html;return e;}
   function txt(tag,cls,t){var e=document.createElement(tag);if(cls)e.className=cls;e.textContent=t;return e;}
 
@@ -107,9 +122,33 @@
     return box;
   }
 
+  /* label perangkat eksekusi: HP atau laptop */
+  var DEV={
+    hp:{t:'Lebih enak dicoba di HP',i:'<rect x="7" y="2" width="10" height="20" rx="2.5"/><path d="M11 18h2"/>'},
+    laptop:{t:'Lebih enak dicoba di laptop',i:'<rect x="4" y="4" width="16" height="11" rx="2"/><path d="M2 19h20"/>'}
+  };
+  function deviceLabel(f){
+    var d=DEV[f.device];if(!d)return null;
+    return mk('span','device','<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+d.i+'</svg><span>'+d.t+'</span>');
+  }
+  var linkIco='<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.1 0l3-3a5 5 0 0 0-7.1-7.1l-1 1"/><path d="M14 11a5 5 0 0 0-7.1 0l-3 3a5 5 0 0 0 7.1 7.1l1-1"/></svg>';
+  /* tombol salin link freebie; label khusus kalau freebie-nya lebih enak di laptop */
+  function shareRow(f){
+    var site=(window.KL_DATA&&KL_DATA.site)||location.origin,url=site+'/freebies/#'+f.slug;
+    var row=mk('div','share-row');
+    var b=mk('button','btn',linkIco+'<span>'+(f.device==='laptop'?'Salin link buat dibuka di laptop':'Salin link freebie ini')+'</span>');b.type='button';
+    var s=mk('span','status');s.setAttribute('aria-live','polite');var t=null;
+    b.addEventListener('click',function(){
+      track('freebie/'+f.slug+'/salin-link','Link freebie disalin');
+      copyText(url,null,function(ok){s.className='status'+(ok?' ok':'');s.textContent=ok?(f.device==='laptop'?'Link tersalin, buka nanti di laptop':'Link tersalin, tinggal bagikan'):'Salin manual '+url;clearTimeout(t);t=setTimeout(function(){s.textContent='';},3000);});
+    });
+    row.appendChild(b);row.appendChild(s);return row;
+  }
+
   function fillFreebie(f,box,opt){
     opt=opt||{};var k=f.key;
     if(!opt.noHead){
+      var dv=deviceLabel(f);if(dv)box.appendChild(dv);
       box.appendChild(txt('span','step',f.step));
       var ch=mk('div','chips');f.chips.forEach(function(c){ch.appendChild(txt('span','chip',c));});box.appendChild(ch);
       var h=txt('h3',null,f.title);h.id=k+'-title';box.appendChild(h);
@@ -141,10 +180,12 @@
     opts.addEventListener('input',bump);opts.addEventListener('change',bump);render();
     box.appendChild(buildActions(pr,f.ais));
     if(f.fine)box.appendChild(txt('p','fine',f.fine));
+    /* di halaman utama, freebie laptop langsung dapat tombol salin link */
+    if(!opt.noHead&&f.device==='laptop')box.appendChild(shareRow(f));
     return box;
   }
 
-  window.KL={track:track,store:store,copyText:copyText,fillFreebie:fillFreebie,data:window.KL_DATA,mk:mk,txt:txt,clearHash:clearHash};
+  window.KL={track:track,store:store,copyText:copyText,fillFreebie:fillFreebie,deviceLabel:deviceLabel,shareRow:shareRow,data:window.KL_DATA,mk:mk,txt:txt,clearHash:clearHash};
 
 
   /* ===== Labi: maskot Kusuma Lab, digambar dengan SVG supaya ringan dan bisa bergerak ===== */

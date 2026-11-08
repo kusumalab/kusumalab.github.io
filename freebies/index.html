@@ -1,11 +1,11 @@
 <!doctype html>
-<html lang="id">
+<html lang="id" data-theme="light" data-default-theme="light">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Freebies · Kusuma Lab</title>
 <meta name="description" content="Semua freebies Kusuma Lab di satu tempat. Prompt siap pakai buat kerjaan kantor dan Solo Creator, gratis.">
-<meta name="theme-color" content="#07080B">
+<meta name="theme-color" content="#F7F7F2">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-3 -4 58 56'%3E%3Cg transform='rotate%28-8 24 26%29'%3E%3Cpath d='M37 31 L45.5 19.5' stroke='%232FA89A' stroke-width='6.5' stroke-linecap='round'/%3E%3Cpath d='M11.5 32 L6.5 39' stroke='%232FA89A' stroke-width='6' stroke-linecap='round'/%3E%3Cpath transform='translate%282 -6%29 scale%28.22%29' d='M80 64 L80 74 Q60 104 40 136 Q24 162 26 178 Q28 196 50 198 L150 198 Q172 196 174 178 Q176 162 160 136 Q140 104 120 74 L120 64 Z' fill='%2397FCE4'/%3E%3Crect x='18.3' y='3.6' width='11.4' height='5.4' rx='2.2' fill='%232FA89A'/%3E%3Ccircle cx='19.5' cy='23' r='4.3' fill='%23fff'/%3E%3Ccircle cx='28.5' cy='23' r='4.3' fill='%23fff'/%3E%3Ccircle cx='20.2' cy='23.4' r='2.3' fill='%2307080B'/%3E%3Ccircle cx='29.2' cy='23.4' r='2.3' fill='%2307080B'/%3E%3C/g%3E%3C/svg%3E">
 <link rel="canonical" href="https://kusumalab.com/freebies/">
 <meta property="og:type" content="website">
@@ -102,7 +102,6 @@
   window.KL_KEEP_HASH=true;
   var D=KL.data,list=document.getElementById('lib-list');
   var chev='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>';
-  var linkIco='<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.1 0l3-3a5 5 0 0 0-7.1-7.1l-1 1"/><path d="M14 11a5 5 0 0 0-7.1 0l-3 3a5 5 0 0 0 7.1 7.1l1-1"/></svg>';
   var now=Date.now();
   function isNew(f){var t=Date.parse(f.date+'T00:00:00+08:00');return !isNaN(t)&&now-t<=14*864e5&&now>=t;}
   var items=D.freebies.slice().sort(function(a,b){return (b.date||'').localeCompare(a.date||'')||(a.core===b.core?0:a.core?1:-1);});
@@ -115,6 +114,7 @@
     meta.appendChild(KL.txt('span','chip cat',D.categories[f.category].label.toUpperCase()));
     if(f.core)meta.appendChild(KL.txt('span','chip','FONDASI'));
     if(isNew(f))meta.appendChild(KL.txt('span','badge-new','BARU'));
+    var dv=KL.deviceLabel(f);if(dv)meta.appendChild(dv);
     head.appendChild(meta);
     head.appendChild(KL.txt('span','lib-title',f.title));
     head.appendChild(KL.txt('span','lib-sum',f.summary||f.desc||''));
@@ -122,20 +122,14 @@
     var body=KL.mk('div','lib-body');body.id=f.slug+'-body';body.hidden=true;
     var note=KL.mk('div','note');note.appendChild(KL.txt('span','ntag','HONEST NOTE'));note.appendChild(KL.txt('span',null,D.categories[f.category].note));body.appendChild(note);
     if(f.source&&f.source.url){
-      var src=KL.mk('p','src-line');src.appendChild(document.createTextNode('Dari konten: '));
+      var src=KL.mk('p','src-line');src.appendChild(document.createTextNode('Dari konten '));
       var a=KL.txt('a',null,f.source.title||'lihat di Instagram');a.href=f.source.url;a.target='_blank';a.rel='noopener';src.appendChild(a);body.appendChild(src);
     }
     var built=false;
-    var share=KL.mk('div','share-row');
-    var sb=KL.mk('button','btn',linkIco+'<span>Salin link freebie ini</span>');sb.type='button';
-    var ss=KL.mk('span','status');ss.setAttribute('aria-live','polite');var st=null;
-    sb.addEventListener('click',function(){
-      var url=(D.site||location.origin)+'/freebies/#'+f.slug;
-      KL.copyText(url,null,function(ok){ss.className='status'+(ok?' ok':'');ss.textContent=ok?'Link tersalin, tinggal bagikan':'Salin manual: '+url;clearTimeout(st);st=setTimeout(function(){ss.textContent='';},3000);});
-    });
-    share.appendChild(sb);share.appendChild(ss);
     function setOpen(o,fromHash){
-      if(o&&!built){KL.fillFreebie(f,body,{noHead:true});body.appendChild(share);built=true;}
+      if(o&&!built){KL.fillFreebie(f,body,{noHead:true});body.appendChild(KL.shareRow(f));built=true;}
+      /* catat setiap freebie dibuka: lewat klik di perpustakaan (buka) atau lewat link langsung, misalnya dari caption (link) */
+      if(o&&body.hidden)KL.track('freebie/'+f.slug+'/'+(fromHash?'link':'buka'),fromHash?'Freebie dibuka dari link langsung':'Freebie dibuka di perpustakaan');
       body.hidden=!o;art.classList.toggle('open',o);head.setAttribute('aria-expanded',String(o));open.firstChild.textContent=o?'Tutup':'Buka';
     }
     head.addEventListener('click',function(){setOpen(body.hidden);});
